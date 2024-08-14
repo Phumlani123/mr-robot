@@ -3,14 +3,14 @@ import React, { useMemo } from "react";
 
 type HeadingLevels = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export type HeadingType = {
+export type HeadingProps = {
   level: HeadingLevels;
   text: string;
   className?: string;
 };
 
-export const Heading = ({ text, level, className }: HeadingType) => {
-  const styles = useMemo(() => {
+export const Heading = ({ text, level, className }: HeadingProps) => {
+  const headingSizes = useMemo(() => {
     return {
       h1: "text-5xl",
       h2: "text-4xl",
@@ -21,5 +21,9 @@ export const Heading = ({ text, level, className }: HeadingType) => {
     }[level];
   }, [level]);
 
-  return React.createElement(level, { className: cn(styles, className) }, text);
+  return React.createElement(
+    level,
+    { className: cn(headingSizes, className) },
+    text
+  );
 };

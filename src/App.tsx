@@ -1,8 +1,16 @@
 import "./App.css";
-import { Heading } from "@components/ui";
+import { ContentLayout } from "@components/layout";
+import { Button, Heading } from "@components/ui";
+import { MrRobot } from "@features/MrRobot";
 
 function App() {
-  return <Heading text="test" level="h2" />;
+  return (
+    <ContentLayout>
+      <div className="flex justify-end w-full">
+        <MrRobot />
+      </div>
+    </ContentLayout>
+  );
 }
 
 export default App;
