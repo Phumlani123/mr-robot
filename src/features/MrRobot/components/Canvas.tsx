@@ -1,10 +1,5 @@
-import React, {
-  CanvasHTMLAttributes,
-  DetailedHTMLProps,
-  FC,
-  useEffect,
-  useRef,
-} from "react";
+import { useCanvas } from "@/hooks/useCanvas";
+import React, { CanvasHTMLAttributes, DetailedHTMLProps, FC } from "react";
 
 type CanvasProps = DetailedHTMLProps<
   CanvasHTMLAttributes<HTMLCanvasElement>,
@@ -12,21 +7,11 @@ type CanvasProps = DetailedHTMLProps<
 > & { draw: (context: CanvasRenderingContext2D) => void };
 
 export const Canvas: FC<CanvasProps> = ({ draw, ...props }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const context = canvas.getContext("2d");
-    if (!context) return;
-
-    draw(context);
-  }, [draw]);
+  const canvasRef = useCanvas(draw);
 
   return (
     <canvas
-      className="z-10"
+      className={"w-full h-full absolute top-0 left-0 " + props.className}
       width={props.width}
       height={props.height}
       ref={canvasRef}

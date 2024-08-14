@@ -1,45 +1,64 @@
-import { useCallback } from "react";
 import { Canvas } from "./components/Canvas";
-import regions, { Region } from "./robot_regions";
+import { useAnnotationContext } from "@/hooks/useAnnotationContext";
+import { AnnotationContextType } from "@/providers/AnnotationContextProvider";
+import { AnnotationItemType } from "@/types/AnnotationItemType";
+import { CanvasImage } from "./components/CanvasImage";
 
 const BACKGROUND_IMAGE = new Image();
 BACKGROUND_IMAGE.src = "./mrRobot.png";
-BACKGROUND_IMAGE.className = "mr__robot";
 
-export const MrRobot = () => {
-  const annotationBoxes = useCallback(
-    (context: CanvasRenderingContext2D, item: Region) => {
-      context.fillStyle = item.color;
-      context.strokeStyle = item.color;
-      context.strokeRect(
-        Math.round(item.x * BACKGROUND_IMAGE.width),
-        Math.round(item.y * BACKGROUND_IMAGE.height),
-        Math.round(item.w * BACKGROUND_IMAGE.width),
-        Math.round(item.h * BACKGROUND_IMAGE.height)
-      );
-      context.fillRect(
-        Math.round(item.x * BACKGROUND_IMAGE.width),
-        Math.round(item.y * BACKGROUND_IMAGE.height),
-        Math.round(item.w * BACKGROUND_IMAGE.width),
-        Math.round(item.h * BACKGROUND_IMAGE.height)
-      );
+type MrRobotProps = {
+  className: string;
+};
 
-      return context;
-    },
-    []
-  );
+export const MrRobot = ({ className }: MrRobotProps) => {
+  const { annotations } = useAnnotationContext() as AnnotationContextType;
+
+  const annotationBoxes = (
+    context: CanvasRenderingContext2D,
+    item: AnnotationItemType,
+    image: HTMLImageElement
+  ) => {
+    context.fillStyle = item.color;
+    context.strokeStyle = item.color;
+
+    context.strokeRect(
+      Math.round(item.x * image.width),
+      Math.round(item.y * image.height),
+      Math.round(item.w * image.width),
+      Math.round(item.h * image.height)
+    );
+    context.fillRect(
+      Math.round(item.x * image.width),
+      Math.round(item.y * image.height),
+      Math.round(item.w * image.width),
+      Math.round(item.h * image.height)
+    );
+
+    return context;
+  };
 
   const drawCanvas = (context: CanvasRenderingContext2D) => {
-    const rect = context.canvas.getBoundingClientRect();
-    context.drawImage(BACKGROUND_IMAGE, 0, 0);
-    return regions.map((item) => annotationBoxes(context, item));
+    BACKGROUND_IMAGE.onload = () => {
+      context.canvas.width = BACKGROUND_IMAGE.width;
+      context.canvas.height = BACKGROUND_IMAGE.height;
+      console.log(BACKGROUND_IMAGE);
+    };
+
+    annotations.map((item) => annotationBoxes(context, item, BACKGROUND_IMAGE));
   };
 
   return (
-    <Canvas
-      draw={drawCanvas}
-      width={BACKGROUND_IMAGE.width}
-      height={BACKGROUND_IMAGE.height / 1.3}
-    />
+    <div className="w-[605px] h-[805px]">
+      <div className="w-full h-full relative">
+        <CanvasImage />
+        <Canvas
+          draw={drawCanvas}
+          className={className}
+          // width={BACKGROUND_IMAGE.width}
+          // height={BACKGROUND_IMAGE.height / 1.3}
+        />
+      </div>
+    </div>
   );
 };

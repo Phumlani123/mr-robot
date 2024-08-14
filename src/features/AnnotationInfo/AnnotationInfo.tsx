@@ -1,20 +1,27 @@
 import React from "react";
+import { AnnotationInfoItem } from "./components/AnnotationInfoItem";
+import { Switch } from "@/components/ui";
+import { AnnotationItemType } from "@/types/AnnotationItemType";
+import { useAnnotationContext } from "@/hooks/useAnnotationContext";
+import { AnnotationContextType } from "@/providers/AnnotationContextProvider";
 
-export const AnnotationInfo = () => {
+export type AnnotationInfoProps = {
+  items: AnnotationItemType[];
+};
+
+export const AnnotationInfo = ({ items }: AnnotationInfoProps) => {
+  const { setAnnotationStatus } =
+    useAnnotationContext() as AnnotationContextType;
   return (
-    <div className="flex flex-col absolute right-[4rem] justify-center items-end">
-      <a className="no-underline text-[#666] mx-0 my-2" href="#">
-        Spot
-      </a>
-      <a className="no-underline text-[#666] mx-0 my-2" href="#">
-        Handle
-      </a>
-      <a className="no-underline text-[#666] mx-0 my-2" href="#">
-        Pick
-      </a>
-      <a className="no-underline text-[#666] mx-0 my-2" href="#">
-        Atlas
-      </a>
+    <div className="flex flex-col z-10 absolute right-[4rem] justify-center items-end">
+      {items.map((item) => (
+        <AnnotationInfoItem
+          key={item.class_uuid}
+          item={item}
+          updateItem={setAnnotationStatus}
+        />
+      ))}
+      <Switch />
     </div>
   );
 };

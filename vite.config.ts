@@ -10,6 +10,8 @@ export default defineConfig({
       "@assets": "/src/assets",
       "@features": "/src/features",
       "@utils": "/src/utils",
+      "@hooks": "/src/hooks",
+      "@providers": "/src/providers",
     },
   },
 });
