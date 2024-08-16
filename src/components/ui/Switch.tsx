@@ -1,6 +1,18 @@
-import React from "react";
+import { useState } from "react";
 
-export const Switch = () => {
+export type SwitchProps = {
+  toggleItems: (status: boolean) => void;
+  checkedStatus: boolean;
+};
+
+export const Switch = ({ toggleItems, checkedStatus }: SwitchProps) => {
+  const [checked, setChecked] = useState<boolean>(checkedStatus);
+
+  const handleToggle = () => {
+    setChecked((prev) => !prev);
+    toggleItems(checked);
+  };
+
   return (
     <label
       htmlFor="toggle"
@@ -8,7 +20,14 @@ export const Switch = () => {
     >
       <span className="text-sm text-[#555]">Show All</span>
       <span className="relative">
-        <input id="toggle" type="checkbox" className="hidden peer" />
+        <input
+          onChange={handleToggle}
+          id="toggle"
+          checked={checked}
+          value={`${checked}`}
+          type="checkbox"
+          className="hidden peer"
+        />
         <div className="w-8 h-4 rounded-full shadow-inner dark:bg-[#555] peer-checked:dark:bg-gray-800"></div>
         <div className="absolute inset-y-0 left-0 w-4 h-4 rounded-full shadow peer-checked:right-0 peer-checked:left-auto dark:bg-gray-100"></div>
       </span>

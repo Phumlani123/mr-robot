@@ -4,7 +4,9 @@ import { createContext, ReactNode, useState } from "react";
 
 export type AnnotationContextType = {
   annotations: AnnotationItemType[];
+  allChecked: boolean;
   setAnnotationStatus: (id: string | undefined, status: boolean) => void;
+  setAllAnnotationsStatus: (status: boolean) => void;
 };
 
 export const AnnotationContext = createContext<AnnotationContextType | null>(
@@ -15,6 +17,7 @@ const AnnotationProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [annotations, setAnnotations] = useState(regions);
+  const [allChecked, setAllChecked] = useState<boolean>(false);
 
   const setAnnotationStatus = (
     id: string | undefined,
@@ -27,8 +30,22 @@ const AnnotationProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
 
+  const setAllAnnotationsStatus = (currentStatus: boolean) => {
+    setAnnotations(
+      annotations.map((item) => ({ ...item, status: currentStatus }))
+    );
+    setAllChecked(currentStatus);
+  };
+
   return (
-    <AnnotationContext.Provider value={{ annotations, setAnnotationStatus }}>
+    <AnnotationContext.Provider
+      value={{
+        annotations,
+        setAnnotationStatus,
+        setAllAnnotationsStatus,
+        allChecked,
+      }}
+    >
       {children}
     </AnnotationContext.Provider>
   );

@@ -1,6 +1,6 @@
 import { Sizes } from "@/types/Size";
 import { cn } from "@/utils/cn";
-import React, { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
 export type LabelProps = {
   size: Sizes;

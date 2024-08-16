@@ -1,5 +1,4 @@
 import { cn } from "@/utils/cn";
-import React from "react";
 
 export type ImageProps = {
   url: string;

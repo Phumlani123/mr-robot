@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Footer = () => {
   return (
     <footer className="absolute bottom-[4rem] p-4 mx-auto">

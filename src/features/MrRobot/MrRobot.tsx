@@ -4,60 +4,55 @@ import { AnnotationContextType } from "@/providers/AnnotationContextProvider";
 import { AnnotationItemType } from "@/types/AnnotationItemType";
 import { CanvasImage } from "./components/CanvasImage";
 
-const BACKGROUND_IMAGE = new Image();
-BACKGROUND_IMAGE.src = "./mrRobot.png";
-
-type MrRobotProps = {
-  className: string;
-};
-
-export const MrRobot = ({ className }: MrRobotProps) => {
+export const MrRobot = () => {
   const { annotations } = useAnnotationContext() as AnnotationContextType;
+  const imageWidth = 605;
+  const imageHeight = 807;
 
   const annotationBoxes = (
     context: CanvasRenderingContext2D,
-    item: AnnotationItemType,
-    image: HTMLImageElement
+    item: AnnotationItemType
   ) => {
     context.fillStyle = item.color;
     context.strokeStyle = item.color;
 
-    context.strokeRect(
-      Math.round(item.x * image.width),
-      Math.round(item.y * image.height),
-      Math.round(item.w * image.width),
-      Math.round(item.h * image.height)
-    );
-    context.fillRect(
-      Math.round(item.x * image.width),
-      Math.round(item.y * image.height),
-      Math.round(item.w * image.width),
-      Math.round(item.h * image.height)
-    );
+    const drawRect = (
+      context: CanvasRenderingContext2D,
+      item: AnnotationItemType,
+      imageWidth: number,
+      imageHeight: number
+    ) => {
+      const x = Math.round(item.x * imageWidth);
+      const y = Math.round(item.y * imageHeight);
+      const w = Math.round(item.w * imageWidth);
+      const h = Math.round(item.h * imageHeight);
+
+      context.strokeRect(x, y, w, h);
+      context.fillRect(x, y, w, h);
+    };
+
+    drawRect(context, item, imageWidth, imageHeight);
 
     return context;
   };
 
   const drawCanvas = (context: CanvasRenderingContext2D) => {
-    BACKGROUND_IMAGE.onload = () => {
-      context.canvas.width = BACKGROUND_IMAGE.width;
-      context.canvas.height = BACKGROUND_IMAGE.height;
-      console.log(BACKGROUND_IMAGE);
-    };
+    context.canvas.width = imageWidth;
+    context.canvas.height = imageHeight;
 
-    annotations.map((item) => annotationBoxes(context, item, BACKGROUND_IMAGE));
+    annotations
+      .filter((item) => {
+        if (item.status === undefined) item.status = true;
+        return item.status;
+      })
+      .map((item) => annotationBoxes(context, item));
   };
 
   return (
-    <div className="w-[605px] h-[805px]">
+    <div className="w-[605px] h-[807px] 3xl 3xl:w-[786.5px] 3xl:h-[1049.1px] -mt-12 mr-0 lg:mr-24">
       <div className="w-full h-full relative">
         <CanvasImage />
-        <Canvas
-          draw={drawCanvas}
-          className={className}
-          // width={BACKGROUND_IMAGE.width}
-          // height={BACKGROUND_IMAGE.height / 1.3}
-        />
+        <Canvas draw={drawCanvas} />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import { AnnotationInfoItem } from "./components/AnnotationInfoItem";
 import { Switch } from "@/components/ui";
 import { AnnotationItemType } from "@/types/AnnotationItemType";
@@ -10,8 +9,9 @@ export type AnnotationInfoProps = {
 };
 
 export const AnnotationInfo = ({ items }: AnnotationInfoProps) => {
-  const { setAnnotationStatus } =
+  const { allChecked, setAnnotationStatus, setAllAnnotationsStatus } =
     useAnnotationContext() as AnnotationContextType;
+
   return (
     <div className="flex flex-col z-10 absolute right-[4rem] justify-center items-end">
       {items.map((item) => (
@@ -21,7 +21,10 @@ export const AnnotationInfo = ({ items }: AnnotationInfoProps) => {
           updateItem={setAnnotationStatus}
         />
       ))}
-      <Switch />
+      <Switch
+        checkedStatus={allChecked}
+        toggleItems={setAllAnnotationsStatus}
+      />
     </div>
   );
 };

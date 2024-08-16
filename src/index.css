@@ -13,3 +13,29 @@ body {
   min-height: 100vh;
   background: #d3d3d3;
 }
+
+.cursor__dot div:last-child {
+  background-color: #777 !important;
+}
+
+.cursor__dot div:first-child {
+  background-color: #6666665d !important;
+}
+
+.bg__text::after {
+  color: #ffffff8f;
+  content: attr(data-bg-text);
+  display: block;
+  font-size: 12rem;
+  line-height: 1;
+  position: absolute;
+  top: 60vh;
+  right: 10px;
+}
+
+.bg__image {
+  background-image: url("bg-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}

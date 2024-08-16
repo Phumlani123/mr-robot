@@ -1,5 +1,4 @@
 import { Image } from "@/components/ui";
-import React from "react";
 
 export const CanvasImage = () => {
   return (
