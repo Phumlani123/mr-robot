@@ -9,7 +9,7 @@ export type AnnotationInfoProps = {
 };
 
 export const AnnotationInfo = ({ items }: AnnotationInfoProps) => {
-  const { allChecked, setAnnotationStatus, setAllAnnotationsStatus } =
+  const { setAnnotationStatus, setAllAnnotationsStatus } =
     useAnnotationContext() as AnnotationContextType;
 
   return (
@@ -21,10 +21,7 @@ export const AnnotationInfo = ({ items }: AnnotationInfoProps) => {
           updateItem={setAnnotationStatus}
         />
       ))}
-      <Switch
-        checkedStatus={allChecked}
-        toggleItems={setAllAnnotationsStatus}
-      />
+      <Switch toggleItems={setAllAnnotationsStatus} />
     </div>
   );
 };

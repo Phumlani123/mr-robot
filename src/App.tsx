@@ -1,6 +1,6 @@
 import "./App.css";
-import { ContentLayout } from "@components/layout";
-import { MrRobot } from "@features/MrRobot";
+import { ContentLayout } from "@/components/layout";
+import { MrRobot } from "@/features/MrRobot";
 import AnimatedCursor from "react-animated-cursor";
 
 function App() {

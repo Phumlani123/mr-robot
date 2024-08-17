@@ -49,8 +49,8 @@ export const MrRobot = () => {
   };
 
   return (
-    <div className="w-[605px] h-[807px] 3xl 3xl:w-[786.5px] 3xl:h-[1049.1px] -mt-12 mr-0 lg:mr-24">
-      <div className="w-full h-full relative">
+    <div className="w-[605px] h-[807px] 2xl:w-[786.5px] 2xl:h-[1049.1px] -mt-12">
+      <div className="w-full h-full relative mr-0 lg:mr-24">
         <CanvasImage />
         <Canvas draw={drawCanvas} />
       </div>

@@ -23,8 +23,8 @@ export const ContentLayout = ({ children }: ContentLayoutProps) => {
       </div>
       <AnnotationInfo items={annotations} />
       {children}
-      <Tilt className="absolute top-[5rem] z-0 opacity-0 md:opacity-60 md:w-2/6 2xl:w-5/12">
-        <Image className="" url="/logo.png" />
+      <Tilt className="absolute top-[5rem] z-0 opacity-0 md:opacity-100 md:w-2/6 2xl:w-5/12">
+        <Image className="" url="/logo.png" altText="logo image" />
       </Tilt>
       <Footer />
     </div>

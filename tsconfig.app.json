@@ -8,11 +8,12 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "@testing-library/jest-dom", "vitest-canvas-mock"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
@@ -24,13 +25,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["*"],
-      "@components/*": ["components/*"],
-      "@assets": ["assets/*"],
-      "@features/*": ["features/*"],
-      "@types/*": ["types/*"],
-      "@hooks/*": ["hooks/*"],
-      "@providers/*": ["providers/*"]
+      "@/*": ["*"]
+      // "@components/*": ["components/*"],
+      // "@assets": ["assets/*"],
+      // "@features/*": ["features/*"],
+      // "@types/*": ["types/*"],
+      // "@hooks/*": ["hooks/*"],
+      // "@providers/*": ["providers/*"]
     }
   },
   "include": ["src"]

@@ -2,11 +2,10 @@ import { useState } from "react";
 
 export type SwitchProps = {
   toggleItems: (status: boolean) => void;
-  checkedStatus: boolean;
 };
 
-export const Switch = ({ toggleItems, checkedStatus }: SwitchProps) => {
-  const [checked, setChecked] = useState<boolean>(checkedStatus);
+export const Switch = ({ toggleItems }: SwitchProps) => {
+  const [checked, setChecked] = useState<boolean>(false);
 
   const handleToggle = () => {
     setChecked((prev) => !prev);
@@ -15,6 +14,7 @@ export const Switch = ({ toggleItems, checkedStatus }: SwitchProps) => {
 
   return (
     <label
+      data-testid="switch"
       htmlFor="toggle"
       className="inline-flex my-4 items-center space-x-4 cursor-pointer dark:text-[#555]"
     >
@@ -26,6 +26,7 @@ export const Switch = ({ toggleItems, checkedStatus }: SwitchProps) => {
           checked={checked}
           value={`${checked}`}
           type="checkbox"
+          data-testid="switch-input"
           className="hidden peer"
         />
         <div className="w-8 h-4 rounded-full shadow-inner dark:bg-[#555] peer-checked:dark:bg-gray-800"></div>

@@ -11,6 +11,7 @@ export const Canvas = ({ draw, ...props }: CanvasProps) => {
 
   return (
     <canvas
+      data-testid="canvas"
       className={"w-full h-full absolute top-0 left-0"}
       width={props.width}
       height={props.height}

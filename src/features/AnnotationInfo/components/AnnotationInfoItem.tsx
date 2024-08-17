@@ -1,5 +1,4 @@
-import { useAnnotationContext } from "@/hooks/useAnnotationContext";
-import { AnnotationContextType } from "@/providers/AnnotationContextProvider";
+import { Label } from "@/components/ui/Label";
 import { AnnotationItemType } from "@/types/AnnotationItemType";
 import { cn } from "@/utils/cn";
 import { useState } from "react";
@@ -17,7 +16,6 @@ export const AnnotationInfoItem = ({
 }: AnnotationInfoItemProps) => {
   const [checked, setChecked] = useState<boolean>(true);
   const { class_name, class_uuid, status } = item as AnnotationItemType;
-  const { allChecked } = useAnnotationContext() as AnnotationContextType;
 
   const handleItemChecked = () => {
     setChecked((prev) => {
@@ -27,11 +25,12 @@ export const AnnotationInfoItem = ({
     });
   };
 
-  console.log(status, checked);
+  console.log(status);
 
   return (
-    <label
+    <Label
       htmlFor={class_uuid}
+      size="medium"
       className={cn(
         `no-underline text-[#555] mx-0 my-2 hover:text-[#888]`,
         status === undefined ? "" : !status ? "line-through" : "",
@@ -43,10 +42,10 @@ export const AnnotationInfoItem = ({
         onChange={handleItemChecked}
         type="checkbox"
         id={class_uuid}
-        checked={!allChecked ? allChecked : status}
-        value={`${!allChecked ? allChecked : status}`}
+        checked={checked}
+        value={`${checked}`}
       />
       {class_name}
-    </label>
+    </Label>
   );
 };
