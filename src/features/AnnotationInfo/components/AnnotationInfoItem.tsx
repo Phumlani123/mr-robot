@@ -15,14 +15,12 @@ export const AnnotationInfoItem = ({
   updateItem,
 }: AnnotationInfoItemProps) => {
   const { class_name, class_uuid, status } = item as AnnotationItemType;
-  const [checked, setChecked] = useState<boolean>(status ?? true);
+  const [visible, setVisible] = useState<boolean>(status ?? true);
 
   const handleItemChecked = () => {
-    setChecked((prev) => {
-      const newChecked = !prev;
-      updateItem(class_uuid, newChecked);
-      return newChecked;
-    });
+    const newVisible = !visible;
+    setVisible(newVisible);
+    updateItem(class_uuid, newVisible);
   };
 
   return (
@@ -40,8 +38,8 @@ export const AnnotationInfoItem = ({
         onChange={handleItemChecked}
         type="checkbox"
         id={class_uuid}
-        checked={checked}
-        value={`${checked}`}
+        checked={visible}
+        value={`${visible}`}
       />
       {class_name}
     </Label>

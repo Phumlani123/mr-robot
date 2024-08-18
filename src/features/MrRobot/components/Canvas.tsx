@@ -1,7 +1,7 @@
 import { useCanvas } from "@/hooks/useCanvas";
 import { CanvasHTMLAttributes, DetailedHTMLProps } from "react";
 
-type CanvasProps = DetailedHTMLProps<
+export type CanvasProps = DetailedHTMLProps<
   CanvasHTMLAttributes<HTMLCanvasElement>,
   HTMLCanvasElement
 > & { draw: (context: CanvasRenderingContext2D) => void };

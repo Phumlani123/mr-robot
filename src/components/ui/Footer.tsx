@@ -1,6 +1,12 @@
-export const Footer = () => {
+import { cn } from "@/utils/cn";
+
+export type FooterProps = {
+  className?: string;
+};
+
+export const Footer = ({ className }: FooterProps) => {
   return (
-    <footer className="absolute bottom-[4rem] p-4 mx-auto">
+    <footer className={cn(className, "absolute bottom-[4rem] p-4 mx-auto")}>
       <div className="flex space-x-6">
         <a href="#" className="text-[#555] hover:text-gray-800">
           <svg

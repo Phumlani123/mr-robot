@@ -21,7 +21,7 @@ Run
     npm run dev or yarn dev
 ```
 
-- Navigate to the specified url to run the application
+Navigate to the specified url to run the application
 
 ## To run tests:
 
@@ -29,4 +29,12 @@ Run
 
 ```bash
 npm run test
+```
+
+## To run storybook:
+
+Run
+
+```bash
+npm run storybook
 ```
