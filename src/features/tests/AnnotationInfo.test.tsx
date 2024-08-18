@@ -1,14 +1,15 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, assert } from "vitest";
 import { AnnotationInfoItem } from "../AnnotationInfo/components/AnnotationInfoItem";
+import { AnnotationItemType } from "@/types/AnnotationItemType";
 
 describe("AnnotationInfoItem", () => {
   const mockUpdateItem = vi.fn();
-  const item: any = {
+  const item = {
     class_name: "Test Class",
     class_uuid: "1234",
     status: true,
-  };
+  } as AnnotationItemType;
 
   it("renders the component with the correct class name", () => {
     render(<AnnotationInfoItem item={item} updateItem={mockUpdateItem} />);
@@ -32,7 +33,6 @@ describe("AnnotationInfoItem", () => {
       />
     );
     const labelElement = screen.getByText("Test Class");
-    console.log(labelElement);
     assert.match(labelElement.className, /line-through/);
   });
 });

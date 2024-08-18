@@ -16,7 +16,7 @@ export const ContentLayout = ({ children }: ContentLayoutProps) => {
       <div className="bg__text relative" data-bg-text="MrRobot"></div>
       <div className="flex flex-col justify-start items-start absolute z-10">
         <Heading className="text-[#555]" level="h1" text="MrRobot" />
-        <p className="text-[#555] text-left">
+        <p className="text-[#555] text-left mt-4">
           Toggle the annotation headings <br /> to the left to show and hide the
           annotation boxes
         </p>

@@ -17,7 +17,6 @@ describe("Switch Component", () => {
     render(<Switch toggleItems={toggleItems} />);
 
     const switchInput = screen.getByTestId("switch-input");
-    console.log(switchInput);
     expect(switchInput).to.haveOwnProperty("checked", false);
 
     fireEvent.click(switchInput);

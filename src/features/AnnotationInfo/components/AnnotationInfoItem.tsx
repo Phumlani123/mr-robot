@@ -14,8 +14,8 @@ export const AnnotationInfoItem = ({
   className,
   updateItem,
 }: AnnotationInfoItemProps) => {
-  const [checked, setChecked] = useState<boolean>(true);
   const { class_name, class_uuid, status } = item as AnnotationItemType;
+  const [checked, setChecked] = useState<boolean>(status ?? true);
 
   const handleItemChecked = () => {
     setChecked((prev) => {
@@ -24,8 +24,6 @@ export const AnnotationInfoItem = ({
       return newChecked;
     });
   };
-
-  console.log(status);
 
   return (
     <Label
