@@ -19,7 +19,7 @@ export const MrRobot = () => {
         if (item.status === undefined) item.status = true;
         return item.status;
       })
-      .map((item) => annotationBoxes(context, item));
+      .map((item) => drawAnnotationBoxes(context, item));
   };
 
   return (
@@ -32,7 +32,19 @@ export const MrRobot = () => {
   );
 };
 
-const annotationBoxes = (
+/**
+ * Draws annotation boxes on a canvas based on the given annotation item.
+ *
+ * This function sets the fill and stroke style of the canvas context
+ * to match the color specified in the annotation item. It then draws
+ * a rectangle on the canvas based on the item's coordinates and dimensions.
+ *
+ * @param {CanvasRenderingContext2D} context - The canvas rendering context.
+ * @param {AnnotationItemType} item - The annotation item containing the
+ *        properties to determine the position, size, and color of the box.
+ */
+
+const drawAnnotationBoxes = (
   context: CanvasRenderingContext2D,
   item: AnnotationItemType
 ) => {
